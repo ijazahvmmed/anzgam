@@ -1,0 +1,30 @@
+{
+  "name": "anz-landscaping",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "astro check && astro build && node scripts/build-worker.mjs",
+    "preview": "astro preview --host 127.0.0.1",
+    "check": "astro check",
+    "start": "node scripts/preview.mjs",
+    "test": "node --test tests/enquiry.test.mjs"
+  },
+  "dependencies": {
+    "astro": "7.4.7",
+    "@astrojs/react": "7.1.4",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "tailwindcss": "4.3.4",
+    "@tailwindcss/vite": "4.3.4",
+    "gsap": "3.15.1",
+    "motion": "14.10.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "latest"
+  }
+}

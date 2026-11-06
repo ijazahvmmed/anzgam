@@ -1,0 +1,29 @@
+---
+import Arrow from './Arrow.astro';
+---
+<header class="site-header" data-header>
+  <a class="brand" href="/" aria-label="ANZ Landscaping home"><img src="/images/logo-mark.webp" width="92" height="45" alt="ANZ" fetchpriority="high" /><span>Landscaping</span></a>
+  <nav class="desktop-nav" aria-label="Main navigation"><a href="/#services">What we do</a><a href="/#projects">Our work</a><a href="/#about">About ANZ</a><a href="/#process">Our approach</a></nav>
+  <a class="nav-cta" href="/#enquire">Let’s talk <Arrow /></a>
+  <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-navigation"><span></span><span></span></button>
+  <nav id="mobile-navigation" class="mobile-nav" aria-label="Mobile navigation" hidden><a href="/#services">What we do <span>01</span></a><a href="/#projects">Our work <span>02</span></a><a href="/#about">About ANZ <span>03</span></a><a href="/#process">Our approach <span>04</span></a><a href="/#enquire">Start a conversation <span>↗</span></a><p>Rooted in Bengaluru.<br />Made for your space.</p></nav>
+</header>
+<script>
+  function setupHeader() {
+    const header = document.querySelector<HTMLElement>('[data-header]');
+    const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+    const menu = document.querySelector<HTMLElement>('#mobile-navigation');
+    if (!header || !toggle || !menu) return;
+    const controller = new AbortController();
+    const close = () => { toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Open navigation'); menu.hidden = true; header.classList.remove('menu-open'); };
+    toggle.addEventListener('click', () => { const open = toggle.getAttribute('aria-expanded') !== 'true'; toggle.setAttribute('aria-expanded', String(open)); toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation'); menu.hidden = !open; header.classList.toggle('menu-open', open); }, { signal: controller.signal });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', close, { signal: controller.signal }));
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') { close(); toggle.focus(); } }, { signal: controller.signal });
+    const media = matchMedia('(min-width: 901px)'); media.addEventListener('change', close, { signal: controller.signal });
+    const observe = () => header.classList.toggle('is-scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', observe, { passive: true, signal: controller.signal }); observe();
+    document.addEventListener('astro:before-swap', () => controller.abort(), { once: true });
+  }
+  setupHeader();
+  document.addEventListener('astro:page-load', setupHeader);
+</script>

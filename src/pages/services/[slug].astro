@@ -1,0 +1,14 @@
+---
+import { Picture } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/Button.astro';
+import Enquiry from '../../components/Enquiry.astro';
+import { services } from '../../data/content';
+export function getStaticPaths() { return services.map(service=>({params:{slug:service.slug},props:{service}})); }
+const { service }=Astro.props;
+---
+<Layout title={`${service.title} — ANZ Landscaping`} description={service.description}>
+ <section class="detail-heading section-pad"><a class="text-link" href="/#services">← Explore our services</a><div class="section-heading"><div><span class="eyebrow">Design · Execution · Care</span><h1>{service.title}</h1></div><p>{service.description}</p></div></section>
+ <div class="service-detail-hero"><Picture fallbackFormat="webp" src={service.image} formats={['avif','webp']} widths={[400,800,Math.min(service.image.width,1400)]} sizes="100vw" alt={service.title} loading="eager" fetchpriority="high" /></div>
+ <section class="service-scope section-pad"><div><span class="eyebrow">Made for your space</span><h2>{service.short}</h2><Button href="#enquire">Discuss your project</Button></div><ul>{service.items.map((item,index)=><li><span>0{index+1}</span>{item}</li>)}</ul></section><Enquiry />
+</Layout>
