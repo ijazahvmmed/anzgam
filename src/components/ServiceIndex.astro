@@ -8,9 +8,9 @@ const {compact=false}=Astro.props;
  {compact&&<h3 id="service-index-title" class="sr-only">All ANZ services</h3>}
  {!compact&&<div class="service-index-heading">
   <div><span class="eyebrow">Services</span><h3 id="service-index-title">All ANZ services</h3></div>
-  <a class="text-link" href="/services/">All {allServices.length} services <ServiceIcon name="arrow" size={18}/></a>
+  <a class="text-link" href="/services/">All {allServices.length} services</a>
  </div>}
  <div class="service-index-groups">
-  {serviceMenuGroups.map(group=><div class="service-index-group"><h4>{group.title}</h4><ul>{group.services.map(service=><li><a href={`/services/${service.slug}/`}><span class="service-index-icon"><ServiceIcon name={service.icon} size={21}/></span><span>{service.title}</span><span class="service-index-arrow" aria-hidden="true">↗</span></a></li>)}</ul></div>)}
+  {serviceMenuGroups.map(group=><div class="service-index-group"><h4>{group.title}</h4><ul>{group.services.map(service=><li><a href={`/services/${service.slug}/`}><span class="service-index-icon"><ServiceIcon name={service.icon} size={21}/></span><span>{service.title}</span></a></li>)}</ul></div>)}
  </div>
 </div>

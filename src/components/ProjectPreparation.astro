@@ -1,0 +1,28 @@
+---
+import RevealHeading from './RevealHeading.astro';
+interface Props { service?: boolean; }
+const { service=false }=Astro.props;
+const notes=service ? [
+ {title:'Reviewing the site',body:'We confirm the design and scope after reviewing your space.'},
+ {title:'Agreeing the estimate',body:'Size, materials and site conditions guide the cost and timing. We provide an estimate before work begins.'},
+] : [
+ {title:'Your space',body:'Include the location and whether it is a home, office, terrace or larger landscape.'},
+ {title:'Your plans',body:'Tell us what you would like to change. For an existing garden, let us know what needs care.'},
+];
+---
+<section id="questions" class="project-preparation section-pad" aria-labelledby="preparation-title">
+ <div class="preparation-heading"><RevealHeading id="preparation-title" lines={[service?'Before work begins':'What to share with us']} variant="soft"/><a class="text-link" href="#enquire">Send project details</a></div>
+ <div class="preparation-notes">{notes.map(note=><article><h3>{note.title}</h3><p>{note.body}</p></article>)}</div>
+</section>
+<style>
+ .project-preparation{display:grid;grid-template-columns:1fr 1.2fr;gap:8vw;align-items:start}
+ .preparation-heading h2{font-size:clamp(35px,3.3vw,50px);max-width:450px}
+ .preparation-heading .text-link{font-size:13px;margin-top:30px}
+ .preparation-notes{display:grid;grid-template-columns:1fr 1fr;gap:35px}
+ .preparation-notes article{border-top:1px solid var(--line);padding-top:22px}
+ .preparation-notes h3{font-size:20px;line-height:1.3;margin-bottom:15px;letter-spacing:-.02em}
+ .preparation-notes p{font-size:14px;line-height:1.65;color:var(--muted);max-width:280px}
+ @media(max-width:900px){.project-preparation{gap:5vw;grid-template-columns:.85fr 1.2fr}.preparation-notes{gap:22px}}
+ @media(max-width:700px){.project-preparation{display:block}.preparation-heading h2{font-size:36px}.preparation-heading .text-link{margin-top:22px}.preparation-notes{margin-top:35px;gap:25px}.preparation-notes h3{font-size:19px}.preparation-notes p{font-size:13px}}
+ @media(max-width:380px){.preparation-notes{grid-template-columns:1fr;gap:26px}.preparation-notes p{max-width:none}}
+</style>

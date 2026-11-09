@@ -2,14 +2,14 @@
 .hero-reframed .hero-photo{left:44%;right:0;top:0;width:56%;height:100%;border-radius:22px 22px 22px 145px;overflow:hidden}
 .hero-reframed .hero-photo:after{content:'';position:absolute;inset:60% 0 0;background:linear-gradient(transparent,#0e30285c);pointer-events:none}
 .hero-reframed .hero-card{left:var(--gutter);top:160px;bottom:auto;width:calc(44% - var(--gutter) - 24px);max-width:none;padding:0;background:none;box-shadow:none;border-radius:0}
-.hero-reframed .hero-card .eyebrow{font-size:9px;letter-spacing:.09em;margin-bottom:38px}
-.hero-reframed h1{font-size:clamp(66px,6.15vw,96px);line-height:.99;letter-spacing:-.065em;margin-bottom:27px}
+.hero-reframed .hero-card .eyebrow{font-size:12px;letter-spacing:normal;margin-bottom:38px}
+.hero-reframed h1{font-size:clamp(66px,6.15vw,96px);line-height:.99;letter-spacing:-.05em;margin-bottom:27px}
 .hero-reframed .hero-card>p{font-size:15px;line-height:1.6;margin-bottom:30px;color:var(--muted)}
 .hero-reframed .hero-secondary{margin-top:20px;margin-left:0;gap:24px;font-size:12px}
 .hero-signature{position:absolute;left:var(--gutter);bottom:40px;display:flex;align-items:center;gap:25px}
 .hero-signature>span{display:block;width:62px;height:62px;color:var(--green)}
 .hero-signature svg{width:100%;height:100%}
-.hero-signature p{font-size:9px;line-height:1.8;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.hero-signature p{font-size:12px;line-height:1.8;letter-spacing:normal;text-transform:none;color:var(--muted)}
 .hero-reframed .hero-caption{bottom:40px;right:35px;gap:22px}
 .hero-reframed .hero-caption>span{font-size:17px}
 .hero-reframed .hero-caption>a{width:45px;height:45px}
@@ -49,7 +49,7 @@
 .approach-reframed .approach-step-title h3{font-size:31px}
 .approach-reframed .approach-steps p{font-size:13px;max-width:305px}
 .care-green .care-copy h2{font-size:clamp(42px,4.2vw,64px)}
-@media(max-width:1100px){.hero-reframed .hero-card{top:145px}.hero-reframed h1{font-size:68px}.hero-reframed .hero-card .eyebrow{font-size:8px}.spotlight-main{height:530px;border-bottom-right-radius:100px}.spotlight-aside{padding-top:60px}.spotlight-detail{height:220px}.spotlight-composition{grid-template-columns:2.8fr 1fr;gap:25px}.spotlight-note{padding-top:25px}.spotlight-leaf{margin-bottom:18px}.spotlight-note>p{font-size:12px}.approach-reframed{gap:6vw}}
+@media(max-width:1100px){.hero-reframed .hero-card{top:145px}.hero-reframed h1{font-size:68px}.hero-reframed .hero-card .eyebrow{font-size:11px}.spotlight-main{height:530px;border-bottom-right-radius:100px}.spotlight-aside{padding-top:60px}.spotlight-detail{height:220px}.spotlight-composition{grid-template-columns:2.8fr 1fr;gap:25px}.spotlight-note{padding-top:25px}.spotlight-leaf{margin-bottom:18px}.spotlight-note>p{font-size:12px}.approach-reframed{gap:6vw}}
 @media(max-width:900px){
  .hero-reframed{height:auto;min-height:0;padding-top:72vw}
  .hero-reframed .hero-photo{left:0;width:100%;height:75vw;border-radius:22px 22px 80px 0}
@@ -66,13 +66,13 @@
  .hero-reframed{margin:8px;padding-top:108vw}
  .hero-reframed .hero-photo{height:110vw;border-radius:16px 16px 0 70px}
  .hero-reframed .hero-card{padding:35px 22px 38px}
- .hero-reframed h1{font-size:55px;letter-spacing:-.06em;line-height:1.01;margin-bottom:23px}
- .hero-reframed .hero-card .eyebrow{font-size:8px;letter-spacing:.07em;margin-bottom:25px}
+ .hero-reframed h1{font-size:clamp(42px,calc(18vw - 15px),55px);letter-spacing:-.045em;line-height:1.01;margin-bottom:23px}
+ .hero-reframed .hero-card .eyebrow{font-size:11px;letter-spacing:normal;margin-bottom:25px}
  .hero-reframed .hero-card>p{font-size:13px;margin-bottom:26px}
  .hero-reframed .hero-secondary{justify-content:flex-start;margin-top:20px;margin-left:3px;font-size:11px}
  .hero-reframed .hero-photo-credit{top:calc(108vw - 26px);font-size:8px;right:20px}
  .project-spotlight{padding-top:50px;padding-bottom:20px}
- .spotlight-heading{display:block;margin-bottom:25px}.spotlight-heading .eyebrow{font-size:8px;margin-bottom:18px}.spotlight-heading h2{font-size:39px}
+ .spotlight-heading{display:block;margin-bottom:25px}.spotlight-heading .eyebrow{font-size:11px;margin-bottom:18px}.spotlight-heading h2{font-size:39px}
  .spotlight-location{flex-direction:row;justify-content:space-between;gap:15px;text-align:left;font-size:10px;margin-top:18px}
  .spotlight-composition{display:block}.spotlight-main{height:auto;aspect-ratio:.92;border-radius:12px 12px 75px 12px}.spotlight-open{width:47px;height:47px;right:24px;bottom:25px}
  .spotlight-aside{display:grid;grid-template-columns:1fr 1.1fr;gap:23px;padding-top:25px;align-items:center}

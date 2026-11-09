@@ -44,6 +44,16 @@ Tests: `npm test`. These use real SQLite to verify persistence, bound SQL, inval
 
 ## Hosting & SEO
 
+### Vercel preview
+
+`vercel.json` selects the Astro framework, runs `npm run build:vercel` and publishes `dist/client`. Astro's `outDir` is intentionally `dist/client`, not its default `dist`. Publishing the parent folder can produce a successful deployment with a platform `404 NOT_FOUND` at `/` because there is no `dist/index.html`.
+
+The Vercel Root Directory must be the directory containing `package.json`, `astro.config.mjs` and `vercel.json`. This GitHub repository already has those files at its root, so leave Root Directory empty. For a manual dashboard correction to the existing commit, set Output Directory to `dist/client` and redeploy. The tracked configuration takes effect when its changes are pushed and a new deployment is built.
+
+The Vercel build only generates the static website; it does not bundle the Cloudflare Worker. `/api/enquiry` currently relies on the Sites/Cloudflare D1 binding (or local SQLite in localhost preview). It needs a Vercel-compatible backend and durable storage before accepting enquiries on Vercel. No submissions are saved by a static-only Vercel deployment.
+
+### Sites hosting
+
 The Sites project ID and D1 binding live in `.openai/hosting.json`. The homepage and detail pages are prerendered; only the form requires server work. Local and production databases are separate. The hosting workflow applies the checked-in schema before deployment.
 
 The initial hosted site is private. On a later public launch or custom-domain migration, update `site` in `astro.config.mjs`, `public/robots.txt`, business metadata and the privacy-policy destination as appropriate. Do not change the existing business domain or DNS as part of a preview deployment.

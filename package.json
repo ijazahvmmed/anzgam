@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
     "build": "astro check && astro build && node scripts/build-worker.mjs",
+    "build:vercel": "astro check && astro build",
     "preview": "astro preview --host 127.0.0.1",
     "check": "astro check",
     "start": "node scripts/preview.mjs",

@@ -9,9 +9,9 @@ function ProjectGrid({ projects, reduced }: { projects: Project[]; reduced: bool
  const present = useIsPresent();
  return <motion.div className="project-grid" initial={{ opacity: reduced ? 1 : 0 }} animate={{ opacity: 1, transition:{duration:reduced?0:.28,ease} }} exit={{ opacity: reduced ? 1 : 0,transition:{duration:reduced?0:.12,ease} }} aria-hidden={!present} inert={!present}>
   {Array.from({length:Math.ceil(projects.length/2)},(_,row)=><div className="project-row" key={row}>{projects.slice(row*2,row*2+2).map(p => <a className="project-card" key={p.slug} href={`/projects/${p.slug}/`}>
-   <div className="project-photo"><img src={p.photo.src} srcSet={p.photo.srcSet} sizes="(max-width: 700px) calc(100vw - 44px), (min-width: 1800px) 850px, 46vw" width={p.photo.width} height={p.photo.height} alt={p.photo.alt} loading="lazy" decoding="async" /><span className="image-tag">{p.category}</span><span className="project-open" aria-hidden="true">↗</span></div>
+   <div className="project-photo"><img src={p.photo.src} srcSet={p.photo.srcSet} sizes="(max-width: 700px) calc(100vw - 44px), (min-width: 1800px) 850px, 46vw" width={p.photo.width} height={p.photo.height} alt={p.photo.alt} loading="lazy" decoding="async" /><span className="image-tag">{p.category}</span></div>
    <div className="project-caption"><h3>{p.name}</h3><span>{p.location}</span></div>
-  </a>)}</div>)}
+</a>)}</div>)}
  </motion.div>;
 }
 

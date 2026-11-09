@@ -1,7 +1,6 @@
 ---
-import Arrow from './Arrow.astro';
 import ButtonGlow from './ButtonGlow.astro';
 interface Props { href: string; light?: boolean; outline?: boolean; class?: string; }
 const { href, light, outline, class: className='' } = Astro.props;
 ---
-<a href={href} class:list={['button', { 'button--light': light, 'button--outline': outline }, className]}><span class="button-label"><span class="button-text"><slot /></span><ButtonGlow/></span><span class="button-icon"><Arrow /><ButtonGlow/></span></a>
+<a href={href} class:list={['button', { 'button--light': light, 'button--outline': outline }, className]}><span class="button-label"><span class="button-text"><slot /></span><ButtonGlow/></span></a>

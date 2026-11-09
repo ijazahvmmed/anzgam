@@ -1,5 +1,4 @@
 ---
-import Arrow from './Arrow.astro';
 import ServiceIcon from './ServiceIcon.astro';
 import ButtonGlow from './ButtonGlow.astro';
 import { serviceMenuGroups } from '../data/services';
@@ -12,23 +11,23 @@ const path=Astro.url.pathname;
   <div class="nav-services" data-desktop-service-area>
    <button class="services-toggle" data-services-toggle aria-expanded="false" aria-controls="desktop-services-menu"><ServiceIcon name="leaf" size={17}/>Services<ServiceIcon name="chevron" size={14} class="nav-chevron"/></button>
    <div id="desktop-services-menu" class="mega-menu" hidden inert>
-    <div class="mega-feature"><img src="/images/menu-garden.webp" width="280" height="380" alt="ANZ terrace garden" loading="lazy"/><div><span class="eyebrow">ANZ services</span><p>Gardens for homes<br/>and businesses.</p><a href="/services/">Explore all services <Arrow/></a></div></div>
-    <div class="mega-groups">{serviceMenuGroups.map(group=><div class="mega-group"><span class="mega-group-title">{group.title}</span>{group.services.map(service=><a href={`/services/${service.slug}/`} class="mega-link" aria-current={path===`/services/${service.slug}/`?'page':undefined}><span class="nav-icon"><ServiceIcon name={service.icon}/></span><span>{service.title}</span><span class="menu-link-arrow" aria-hidden="true">↗</span></a>)}</div>)}<div class="mega-bottom"><span>Design, installation and maintenance.</span><a href="/services/">View every service <Arrow/></a></div></div>
+    <div class="mega-feature"><img src="/images/menu-garden.webp" width="280" height="380" alt="ANZ terrace garden" loading="lazy"/><div><span class="eyebrow">ANZ services</span><p>Gardens for homes<br/>and businesses.</p><a href="/services/">Explore all services</a></div></div>
+    <div class="mega-groups">{serviceMenuGroups.map(group=><div class="mega-group"><span class="mega-group-title">{group.title}</span>{group.services.map(service=><a href={`/services/${service.slug}/`} class="mega-link" aria-current={path===`/services/${service.slug}/`?'page':undefined}><span class="nav-icon"><ServiceIcon name={service.icon}/></span><span>{service.title}</span></a>)}</div>)}<div class="mega-bottom"><span>Design, installation and maintenance.</span><a href="/services/">View every service</a></div></div>
    </div>
   </div>
   <a href="/#projects"><ServiceIcon name="projects" size={17}/>Our work</a>
   <a href="/#about"><ServiceIcon name="about" size={17}/>About ANZ</a>
   <a href="/#process"><ServiceIcon name="approach" size={17}/>Our approach</a>
  </nav>
- <a class="nav-cta" href="/#enquire"><span class="button-text">Let’s talk</span><Arrow/><ButtonGlow/></a>
+ <a class="nav-cta" href="/#enquire"><span class="button-text">Let’s talk</span><ButtonGlow/></a>
  <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-navigation"><span></span><span></span></button>
  <nav id="mobile-navigation" class="mobile-nav" data-lenis-prevent aria-label="Mobile navigation" hidden inert>
   <button class="mobile-services-toggle" aria-expanded="false" aria-controls="mobile-services"><span><ServiceIcon name="leaf" size={21}/>Our services</span><ServiceIcon name="chevron" size={18} class="nav-chevron"/></button>
-  <div id="mobile-services" class="mobile-services" hidden inert>{serviceMenuGroups.map(group=><div><span class="mobile-group-title">{group.title}</span>{group.services.map(service=><a href={`/services/${service.slug}/`}><ServiceIcon name={service.icon} size={20}/><span>{service.title}</span><span aria-hidden="true">↗</span></a>)}</div>)}<a class="mobile-all-services" href="/services/">View every service <Arrow/></a></div>
-  <a href="/#projects"><span><ServiceIcon name="projects" size={21}/>Our work</span><span>02</span></a>
-  <a href="/#about"><span><ServiceIcon name="about" size={21}/>About ANZ</span><span>03</span></a>
-  <a href="/#process"><span><ServiceIcon name="approach" size={21}/>Our approach</span><span>04</span></a>
-  <a href="/#enquire"><span><ServiceIcon name="arrow" size={21}/>Start a conversation</span><span>↗</span></a>
+  <div id="mobile-services" class="mobile-services" hidden inert>{serviceMenuGroups.map(group=><div><span class="mobile-group-title">{group.title}</span>{group.services.map(service=><a href={`/services/${service.slug}/`}><ServiceIcon name={service.icon} size={20}/><span>{service.title}</span></a>)}</div>)}<a class="mobile-all-services" href="/services/">View every service</a></div>
+  <a href="/#projects"><span><ServiceIcon name="projects" size={21}/>Our work</span></a>
+  <a href="/#about"><span><ServiceIcon name="about" size={21}/>About ANZ</span></a>
+  <a href="/#process"><span><ServiceIcon name="approach" size={21}/>Our approach</span></a>
+  <a href="/#enquire"><span>Start a conversation</span></a>
   <p>ANZ Landscaping<br/>Bengaluru</p>
  </nav>
 </header>
