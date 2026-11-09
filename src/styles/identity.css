@@ -1,0 +1,66 @@
+:root{--paper:#f6f3e9;--ink:#1a342d;--muted:#58675e;--green:#163f35;--lime:#dce9ac;--line:#d3d6c8;--stone:#ebe8dc;--mist:#dae5d9;--pollen:#e7edc6;--moss:#b3c276;--footer-ink:#0e3028}
+.site-header{background:#f8f7eff2}
+.projects{background:var(--stone)}
+.care-green{background:var(--mist)}
+.care-green:before{background:radial-gradient(circle at 0 0,transparent calc(var(--join) - .5px),var(--mist) var(--join))}
+.care-green .care-sticker{box-shadow:0 0 0 8px var(--mist)}
+.services-visual{--ink:#f5f4e9;--muted:#c4d2bf}
+
+/* The enquiry, leaf ribbon and footer form one closing composition. */
+.footer-reframed{background:var(--footer-ink);padding:0;color:#f6f3e9;overflow:hidden}
+.footer-ribbon{background:var(--footer-join);border-radius:0 0 0 clamp(65px,8vw,120px);padding:10px 0 28px}
+.footer-frame{padding:45px var(--gutter) 25px}
+.footer-topline{display:flex;align-items:center;justify-content:space-between;padding-bottom:35px;border-bottom:1px solid #e0ebce2b;gap:24px}
+.footer-topline>.eyebrow{font-size:10px;letter-spacing:.1em;color:#c8d3bb}
+.footer-back{display:flex;align-items:center;gap:14px;font-size:11px;color:#d9e1cd}
+.footer-back>span{display:grid;place-items:center;width:40px;height:40px;border:1px solid #d9e1cd45;border-radius:50%;transition:background .35s,transform .4s var(--ease)}
+.footer-back svg{transform:rotate(-90deg);width:18px}
+.footer-back:is(:hover,:focus-visible)>span{background:#e7edc61a;transform:translateY(-3px)}
+.footer-navigation{display:grid;grid-template-columns:1.6fr .75fr 1fr 1.1fr;gap:45px;padding:45px 0 35px}
+.footer-reframed .footer-label{font-size:9px;letter-spacing:.1em;color:#b8c9b1;margin-bottom:22px}
+.footer-navigation nav>a,.footer-visit>a{display:block;width:fit-content;font-size:12px;line-height:1.5;margin-bottom:12px;transition:color .25s,transform .35s var(--ease)}
+.footer-navigation nav>a:is(:hover,:focus-visible),.footer-visit>a:is(:hover,:focus-visible){color:var(--lime);transform:translateX(3px)}
+.footer-contact-title{display:flex;align-items:center;justify-content:space-between;max-width:285px;font-size:clamp(38px,4vw,58px);line-height:1;letter-spacing:-.05em;font-weight:500;padding-bottom:14px;border-bottom:1px solid #e0ebce45;margin-bottom:17px}
+.footer-contact-title svg{width:30px;height:30px;transition:transform .4s var(--ease)}
+.footer-contact-title:is(:hover,:focus-visible) svg{transform:translate(3px,-3px)}
+.footer-contact-email{display:block;font-size:12px;word-break:break-word;margin-bottom:22px}
+.footer-phone{display:block;font-size:17px;letter-spacing:-.02em;margin-bottom:9px}
+.footer-secondary-phone{font-size:12px;color:#c3cfb9}
+.footer-visit address{font-size:12px;line-height:1.8;font-style:normal;color:#d2ddc8;margin-bottom:20px}
+.footer-visit>a>span{margin-left:12px}
+.footer-brandrow{display:flex;align-items:flex-end;justify-content:space-between;gap:60px;padding:45px 0 50px}
+.footer-brandrow>a{width:min(50vw,660px);display:block}
+.footer-brandmark{width:100%;height:auto}
+.footer-brandrow>p{font-size:clamp(28px,3.2vw,46px);line-height:1.15;font-weight:500;letter-spacing:-.045em;color:#c9d8ac;padding-bottom:10px;min-width:250px}
+.footer-legal{display:flex;align-items:center;justify-content:space-between;gap:25px;border-top:1px solid #e0ebce2b;padding-top:25px;font-size:10px;color:#b9c9b0}
+.footer-legal a>span{margin-left:10px}
+.closing-enquiry{position:relative;background:var(--pollen);border-radius:0 clamp(70px,10vw,150px) 0 0;grid-template-columns:.9fr 1.15fr;gap:8vw;padding-bottom:65px}
+.closing-enquiry .enquiry-heading h2{font-size:clamp(54px,5.2vw,78px);line-height:1.02}
+.closing-enquiry .enquiry-heading>p{font-size:15px;margin-bottom:40px}
+.closing-leaf{display:block;width:145px;height:145px;margin-top:50px;color:var(--green)}
+.closing-leaf svg{width:100%;height:100%}
+.closing-enquiry .enquiry-form{background:#fafaf1;border:1px solid #ffffffa6;border-radius:25px 25px 72px 25px;padding:35px}
+.closing-enquiry .field input,.closing-enquiry .field select,.closing-enquiry .field textarea{background:transparent;border:0;border-bottom:1px solid #bcc8af;border-radius:0;padding:12px 0}
+.closing-enquiry .field input:focus,.closing-enquiry .field select:focus,.closing-enquiry .field textarea:focus{border-bottom-color:var(--green)}
+.closing-enquiry .form-bottom{margin-top:30px}
+@media(max-width:1100px){.footer-navigation{grid-template-columns:1.4fr .8fr 1fr;gap:35px}.footer-visit{grid-column:2/4}.footer-brandrow>a{width:54vw}.footer-brandrow>p{font-size:33px;min-width:210px}.closing-enquiry{gap:5vw}.closing-enquiry .enquiry-form{padding:28px}}
+@media(max-width:700px){
+ .footer-ribbon{padding:5px 0 15px;border-radius:0 0 0 65px}
+ .footer-frame{padding:25px 22px 22px}
+ .footer-topline{padding-bottom:25px;gap:15px}.footer-topline>.eyebrow{font-size:8px;max-width:150px}
+ .footer-back{font-size:9px;gap:9px}.footer-back>span{width:33px;height:33px}
+ .footer-navigation{grid-template-columns:1fr 1.1fr;gap:35px 24px;padding:30px 0 20px}
+ .footer-contact{grid-column:1/-1}.footer-contact-title{max-width:100%;font-size:47px;margin-bottom:17px}
+ .footer-contact-email{font-size:13px;margin-bottom:22px}.footer-phone{font-size:19px}.footer-secondary-phone{font-size:12px}
+ .footer-reframed .footer-label{font-size:8px;margin-bottom:18px}
+ .footer-navigation nav>a,.footer-visit>a,.footer-visit address{font-size:11px}
+ .footer-visit{grid-column:1/-1;display:grid;grid-template-columns:1fr 1.1fr;gap:0 24px}.footer-visit .footer-label{grid-column:1}.footer-visit address{grid-column:2;grid-row:1/3}.footer-visit>a{grid-column:1;align-self:start}
+ .footer-brandrow{display:block;padding:30px 0 28px}.footer-brandrow>a{width:100%;max-width:470px}.footer-brandrow>p{font-size:20px;line-height:1.2;padding:0;margin-top:28px;min-width:0}
+ .footer-legal{font-size:8px;gap:15px;padding-top:22px;flex-wrap:wrap}.footer-legal>span:nth-child(2){display:none}
+ .closing-enquiry{padding-bottom:35px;border-radius:0 70px 0 0}
+ .closing-enquiry .enquiry-heading h2{font-size:56px}.closing-enquiry .enquiry-heading>p{font-size:13px;margin-bottom:28px}
+ .closing-leaf{width:70px;height:70px;margin-top:25px}
+ .closing-enquiry .enquiry-form{padding:24px 20px;border-radius:20px 20px 55px 20px;margin-top:30px}
+ .closing-enquiry .field input,.closing-enquiry .field select,.closing-enquiry .field textarea{padding:13px 0}
+}
+@media(prefers-reduced-motion:reduce){.footer-back>span,.footer-contact-title svg,.footer-navigation nav>a,.footer-visit>a{transition:none;transform:none!important}}

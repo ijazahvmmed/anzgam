@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+interface Props {
+ id: string;
+ before: ImageMetadata;
+ after: ImageMetadata;
+ beforeLabel: string;
+ afterLabel: string;
+ alt: string;
+}
+const { id,before,after,beforeLabel,afterLabel,alt }=Astro.props;
+---
+<div class="image-comparison" data-comparison data-before-label={beforeLabel} data-after-label={afterLabel}>
+ <div class="comparison-stage" data-comparison-stage>
+  <Image src={after} widths={[480,800,1200,1448]} sizes="(max-width:700px) calc(100vw - 44px),92vw" format="webp" quality={88} alt={alt+', '+afterLabel.toLowerCase()} loading="lazy" draggable="false"/>
+  <div class="comparison-before" data-comparison-before><Image src={before} widths={[400,600,811]} sizes="(max-width:700px) calc(100vw - 44px),92vw" format="webp" quality={92} alt={alt+', '+beforeLabel.toLowerCase()} loading="lazy" draggable="false"/></div>
+  <svg class="comparison-divider" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true">
+   <defs><clipPath id={id+'-clip'} clipPathUnits="objectBoundingBox"><path data-comparison-mask d="M0 0H.5V1H0Z"/></clipPath></defs>
+   <path data-comparison-line d="M.5 0V1" vector-effect="non-scaling-stroke"/>
+  </svg>
+  <span class="comparison-label comparison-label--before">{beforeLabel}</span><span class="comparison-label comparison-label--after">{afterLabel}</span>
+  <button class="comparison-handle" type="button" role="slider" aria-label={'Compare '+beforeLabel.toLowerCase()+' and '+afterLabel.toLowerCase()} aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext={'50% '+beforeLabel.toLowerCase()} aria-orientation="horizontal" aria-describedby={id+'-help'} data-comparison-handle disabled>
+   <svg viewBox="0 0 32 16" fill="none" aria-hidden="true"><path d="m10 4-4 4 4 4m12-8 4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+ </div>
+ <p id={id+'-help'} class="comparison-instruction">Drag to compare <span aria-hidden="true">↔</span><span class="sr-only">. Use the arrow keys to adjust, Home to reveal the right image, or End to reveal the left image.</span></p>
+</div>
+<script>
+ import { initializeComparisons } from '../scripts/image-comparison';
+ initializeComparisons();
+</script>
+<style>
+ .comparison-stage{position:relative;isolation:isolate;aspect-ratio:1.95;overflow:hidden;border-radius:15px;background:#d5dbcf;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+ .comparison-stage[data-ready]{cursor:ew-resize}
+ .comparison-stage>img,.comparison-before,.comparison-before>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 52%;pointer-events:none}
+ .comparison-before{clip-path:inset(0 50% 0 0)}
+ .comparison-divider{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+ [data-comparison-line]{fill:none;stroke:#f6f6f0;stroke-width:1.2;opacity:.95}
+ .comparison-label{position:absolute;top:22px;z-index:2;padding:8px 12px;border-radius:30px;background:#f4f5efed;color:var(--green);font-size:10px;line-height:1.2;pointer-events:none;transition:opacity .15s}
+ .comparison-label--before{left:22px}.comparison-label--after{right:22px}
+ .comparison-handle{position:absolute;left:50%;top:50%;width:60px;height:44px;padding:0;border:0;display:grid;place-items:center;border-radius:30px;transform:translate(-50%,-50%);background:transparent;color:var(--green);cursor:ew-resize;touch-action:pan-y;z-index:3}
+ .comparison-handle:before{position:absolute;content:'';inset:7px 4px;background:linear-gradient(180deg,#ffffff66,transparent 55%),var(--paper);border:1px solid #ffffffcf;box-shadow:inset 0 1px 0 #ffffffb3,inset 0 -2px 1px #c4d0b5,0 2px 12px #10271e26,0 0 10px #d4e8b833;border-radius:30px;transition:background .25s,transform .3s var(--ease),box-shadow .3s}
+ .comparison-handle svg{position:relative;width:32px;height:16px}
+ .comparison-stage[data-dragging] .comparison-handle:before,.comparison-handle:is(:hover,:focus-visible):before{background:linear-gradient(180deg,#ffffff66,transparent 55%),var(--lime);box-shadow:inset 0 1px 0 #ffffffb3,inset 0 -2px 1px #a4bd7f,0 2px 12px #10271e26,0 0 13px #d4e8b880;transform:scale(1.06)}
+ .comparison-handle:focus-visible{outline:2px solid var(--paper);outline-offset:4px}
+ .comparison-handle:disabled{opacity:1;cursor:default}
+ .comparison-instruction{margin-top:16px;font-size:11px;color:var(--muted);display:flex;gap:12px;align-items:center}
+ .comparison-instruction>span[aria-hidden]{font-size:18px}
+ @media(max-width:700px){.comparison-stage{aspect-ratio:.95;border-radius:12px}.comparison-label{top:15px;font-size:9px;padding:7px 10px}.comparison-label--before{left:15px}.comparison-label--after{right:15px}.comparison-instruction{font-size:10px;margin-top:12px}}
+ @media(prefers-reduced-motion:reduce){.comparison-label,.comparison-handle:before{transition:none}}
+</style>

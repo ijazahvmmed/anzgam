@@ -9,17 +9,18 @@
     "preview": "astro preview --host 127.0.0.1",
     "check": "astro check",
     "start": "node scripts/preview.mjs",
-    "test": "node --test tests/enquiry.test.mjs"
+    "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
-    "astro": "7.4.7",
     "@astrojs/react": "7.1.4",
+    "@tailwindcss/vite": "4.3.4",
+    "astro": "7.4.7",
+    "gsap": "3.15.1",
+    "lenis": "1.3.27",
+    "motion": "14.10.0",
     "react": "19.3.1",
     "react-dom": "19.3.1",
-    "tailwindcss": "4.3.4",
-    "@tailwindcss/vite": "4.3.4",
-    "gsap": "3.15.1",
-    "motion": "14.10.0"
+    "tailwindcss": "4.3.4"
   },
   "devDependencies": {
     "@astrojs/check": "latest",

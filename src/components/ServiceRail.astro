@@ -1,0 +1,11 @@
+---
+import { Image } from 'astro:assets';
+import { imagery,projects } from '../data/content';
+const cards=[
+ {title:'Commercial',text:'Offices, campuses and hospitality.',href:'/services/commercial-landscaping/',image:projects[1].image},
+ {title:'Residential',text:'Villas, terraces and private gardens.',href:'/services/villa-landscaping/',image:projects[0].image},
+ {title:'Plantscaping',text:'Living walls and interior planting.',href:'/services/vertical-garden/',image:imagery.vertical},
+ {title:'Garden care',text:'Regular care for established gardens.',href:'/services/garden-maintenance/',image:imagery.care},
+];
+---
+<div class="service-rail">{cards.map(card=><a href={card.href} class="service-rail-card"><Image src={card.image} widths={[400,700,1100]} sizes="(max-width:700px) 46vw, 40vw" format="webp" quality={84} alt={card.title+' landscaping by ANZ'} loading="lazy"/><div class="rail-caption"><h3>{card.title}</h3><p>{card.text}</p></div><span class="rail-arrow" aria-hidden="true">↗</span></a>)}</div>

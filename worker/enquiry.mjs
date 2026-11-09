@@ -1,4 +1,5 @@
-const services = new Set(['Commercial landscaping','Residential garden','Terrace garden','Plantscaping & living walls','Garden maintenance','Office plant rental','Other services']);
+import { enquiryServices } from '../shared/enquiry-services.mjs';
+const services = new Set([...enquiryServices,'Residential garden','Terrace garden','Plantscaping & living walls']);
 const headers = { 'Content-Type':'application/json; charset=utf-8', 'Cache-Control':'no-store', 'X-Content-Type-Options':'nosniff' };
 const reply=(data,status=200)=>new Response(JSON.stringify(data),{status,headers});
 export async function handleEnquiry(request, env) {

@@ -1,0 +1,14 @@
+---
+import { Image } from 'astro:assets';
+import { projects } from '../data/content';
+import RevealHeading from './RevealHeading.astro';
+import NatureMark from './NatureMark.astro';
+import Arrow from './Arrow.astro';
+const project=projects[0];
+---
+<section id="featured-project" class="project-spotlight section-pad" aria-labelledby="spotlight-title">
+ <div class="spotlight-heading"><div><span class="eyebrow">01 / A closer look at our work</span><RevealHeading id="spotlight-title" lines={["GoodEarth Malhar."]}/></div><div class="spotlight-location"><span>Residential</span><span>{project.location}</span></div></div>
+ <div class="spotlight-composition"><a class="spotlight-main" href={'/projects/'+project.slug+'/'} aria-label="Explore the GoodEarth Malhar project"><Image src={project.image} widths={[480,800,1200,1448]} sizes="(max-width:700px) 92vw,70vw" format="webp" quality={88} alt="Timber decking, hanging planters and tropical foliage at GoodEarth Malhar, enhanced ANZ photography" loading="lazy"/><span class="spotlight-open" aria-hidden="true"><Arrow/></span></a>
+  <div class="spotlight-aside"><div class="spotlight-detail" data-parallax><Image src={project.image} widths={[480,800,1200,1448]} sizes="(max-width:700px) 40vw,21vw" format="webp" quality={88} alt="Detail of the planters and timber pergola at GoodEarth Malhar, enhanced ANZ photography" loading="lazy"/></div><div class="spotlight-note"><span class="spotlight-leaf" data-scroll-shape data-turn="-18"><NatureMark/></span><p>Planting, timber and sheltered seating. A terrace made for everyday life.</p><a class="text-link" href={'/projects/'+project.slug+'/'}>View the project <span>↗</span></a></div></div>
+ </div>
+</section>

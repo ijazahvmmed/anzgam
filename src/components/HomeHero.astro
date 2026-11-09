@@ -1,0 +1,14 @@
+---
+import { Picture } from 'astro:assets';
+import { imagery } from '../data/content';
+import RevealHeading from './RevealHeading.astro';
+import Button from './Button.astro';
+import Arrow from './Arrow.astro';
+import NatureMark from './NatureMark.astro';
+---
+<section class="hero hero-reframed" aria-labelledby="hero-title">
+ <div class="hero-photo"><Picture fallbackFormat="webp" src={imagery.hero} formats={['avif','webp']} widths={[480,800,1200,imagery.hero.width]} sizes="(max-width:900px) 100vw,58vw" alt="ANZ rooftop terrace with a pergola, hanging seating and turquoise cushions, enhanced project photography" loading="eager" fetchpriority="high" quality={86}/></div>
+ <div class="hero-card"><span class="eyebrow"><span class="status-dot"></span>ANZ Landscaping · Bengaluru</span><RevealHeading as="h1" id="hero-title" lines={["Good spaces.","Made greener."]} hero/><p>Landscape design, build and care.<br/>For homes and businesses.</p><Button href="#projects">Explore our work</Button><a class="hero-secondary" href="#enquire">Discuss your project <span>↗</span></a></div>
+ <div class="hero-signature"><span data-scroll-shape data-turn="12"><NatureMark/></span><p>Plant care<br/>Plantscaping<br/>Plant rentals</p></div>
+ <div class="hero-caption"><span>A little closer to nature.</span><a href="#featured-project" aria-label="Explore the featured ANZ project"><Arrow/></a></div><span class="hero-photo-credit">ANZ project photography</span>
+</section>

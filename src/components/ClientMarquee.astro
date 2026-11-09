@@ -1,0 +1,35 @@
+---
+const clients = [
+ { image: 'anzc1.webp', name: 'Brigade Group' },
+ { image: 'anzc6.webp', name: 'BHIVE Workspace' },
+ { image: 'anzc7.webp', name: 'Bosch' },
+ { image: 'anzc5.webp', name: 'Prestige Group' },
+ { image: 'anzc10.webp', name: 'Courtyard by Marriott' },
+];
+---
+<section id="clients" class="client-strip" aria-label="Selected ANZ clients" data-marquee>
+ <div class="client-copy"><p>In good company.<br/><strong>Trusted by leading businesses.</strong></p></div>
+ <div class="logo-window"><div class="logo-track">{[0,1].map(copy=><ul class="logo-group" aria-hidden={copy===1?'true':undefined}>{clients.map(client=><li><img src={`/images/${client.image}`} alt={copy===0?client.name:''} width="130" height="65" loading="lazy" decoding="async"/></li>)}</ul>)}</div></div>
+</section>
+<style>
+ .client-strip{display:flex;align-items:center;gap:45px;margin:0 var(--gutter);padding:34px 0 42px;border-bottom:1px solid var(--line)}
+ .client-copy{display:flex;align-items:center;gap:16px;flex-shrink:0}
+ .client-copy p{font-size:11px;line-height:1.65;color:var(--muted)}
+ .client-copy strong{font-weight:500;color:var(--ink)}
+ .logo-window{min-width:0;flex:1;overflow:hidden;container-type:inline-size;mix-blend-mode:multiply;mask-image:linear-gradient(to right,transparent,#000 4%,#000 96%,transparent)}
+ .logo-track{display:flex;width:max-content}
+ .logo-group{display:flex;align-items:center;justify-content:space-around;flex-shrink:0;min-width:100cqw;gap:clamp(40px,6vw,110px);padding:0 clamp(20px,3vw,55px);margin:0;list-style:none}
+ .logo-group li{display:grid;place-items:center;flex-shrink:0;width:110px;height:65px}
+ .logo-group img{display:block;width:110px;height:54px;object-fit:contain;mix-blend-mode:multiply;filter:grayscale(1);opacity:.65}
+ .logo-group[aria-hidden=true]{display:none}
+ [data-enhanced] .logo-group[aria-hidden=true]{display:flex}
+ [data-enhanced] .logo-track{animation:client-drift 50s linear infinite;animation-play-state:paused;will-change:transform}
+ [data-running=true] .logo-track{animation-play-state:running}
+ .logo-window:hover .logo-track{animation-play-state:paused}
+ @keyframes client-drift{to{transform:translateX(-50%)}}
+ @media(max-width:900px){.client-strip{gap:25px}.client-copy{gap:10px}.logo-group{gap:45px}.logo-group li{width:95px;height:55px}.logo-group img{width:95px;height:45px}}
+ @media(max-width:700px){.client-strip{display:block;margin:0 22px;padding:28px 0 30px}.client-copy{justify-content:center;gap:12px;margin-bottom:20px}.client-copy p{font-size:10px}.client-copy p br{display:none}.client-copy strong{font-weight:400;margin-left:4px}.logo-window{width:100%}.logo-group{gap:40px;padding-inline:20px}.logo-group li{width:85px;height:46px}.logo-group img{width:85px;height:42px}[data-enhanced] .logo-track{animation-duration:38s}}
+ @media(prefers-reduced-motion:reduce){.logo-window{overflow:visible;mask-image:none}.logo-track{width:100%;animation:none!important;transform:none!important;will-change:auto!important}.logo-group{min-width:0;width:100%;flex-wrap:wrap;gap:22px;padding:0}.logo-group[aria-hidden=true],[data-enhanced] .logo-group[aria-hidden=true]{display:none}}
+ @media(scripting:none){.logo-window{overflow:visible;mask-image:none}.logo-track{width:100%}.logo-group{min-width:0;width:100%;flex-wrap:wrap;gap:22px;padding:0}}
+</style>
+

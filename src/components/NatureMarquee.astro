@@ -1,0 +1,26 @@
+---
+interface Props { variant?:'line'|'brand'; }
+const {variant='line'}=Astro.props;
+const blade='M8 10C33 25 66 18 92 41C109 56 114 81 110 104C95 70 66 48 37 42C64 55 82 72 88 89C45 102 17 75 8 10Z';
+const outline='M1 1H77C100 1 119 19 119 43H43C20 43 1 25 1 1Z';
+---
+<div class:list={['nature-marquee',{'nature-marquee--brand':variant==='brand'}]} data-marquee aria-hidden="true"><div class="nature-track">{[0,1].map(copy=><div class="nature-group" data-copy={copy}>{Array.from({length:12},()=> <svg class="marquee-leaf" viewBox={variant==='brand'?'0 0 120 120':'0 0 120 44'} preserveAspectRatio="none"><path d={variant==='brand'?blade:outline}/></svg>)}</div>)}</div></div>
+<style>
+ .nature-marquee{overflow:hidden;width:100%;container-type:inline-size;color:var(--moss,#afbf72);margin-top:65px}
+ .nature-track{display:flex;width:max-content}
+ .nature-group{display:flex;align-items:center;gap:10px;min-width:100cqw;flex-shrink:0;padding:8px 5px}
+ .marquee-leaf{display:block;width:112px;height:38px;fill:none;stroke:currentColor;stroke-width:1;flex-shrink:0}
+ .marquee-leaf:nth-child(even){transform:scaleX(-1)}
+ .nature-group[data-copy="1"]{display:none}
+ [data-enhanced] .nature-group[data-copy="1"]{display:flex}
+ [data-enhanced] .nature-track{animation:leaf-travel 42s linear infinite;animation-play-state:paused;will-change:transform}
+ [data-running=true] .nature-track{animation-play-state:running}
+ .nature-marquee:hover .nature-track{animation-play-state:paused}
+ .nature-marquee--brand{margin:0;color:var(--green)}
+ .nature-marquee--brand .nature-group{gap:22px;padding:12px 11px}
+ .nature-marquee--brand .marquee-leaf{width:154px;height:100px;stroke-width:.8}
+ .nature-marquee--brand .marquee-leaf:nth-child(even){transform:rotate(180deg)}
+ @keyframes leaf-travel{to{transform:translateX(-50%)}}
+ @media(max-width:700px){.nature-marquee{margin-top:35px}.nature-group{gap:8px;padding-inline:4px}.marquee-leaf{width:76px;height:27px}.nature-marquee--brand{margin:0}.nature-marquee--brand .nature-group{gap:16px;padding-inline:8px}.nature-marquee--brand .marquee-leaf{width:108px;height:72px}}
+ @media(prefers-reduced-motion:reduce){.nature-track{animation:none!important;transform:none!important;will-change:auto}.nature-group[data-copy="1"],[data-enhanced] .nature-group[data-copy="1"]{display:none}}
+</style>

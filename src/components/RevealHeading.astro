@@ -1,0 +1,14 @@
+---
+interface Props {
+  as?: 'h1' | 'h2';
+  lines: string[];
+  id?: string;
+  class?: string;
+  variant?: 'mask' | 'soft';
+  hero?: boolean;
+}
+const { as: Tag='h2', lines, id, class: className, variant='mask', hero=false }=Astro.props;
+---
+<Tag id={id} class:list={['reveal-heading',className]} data-reveal={variant} data-hero-reveal={hero || undefined} aria-label={lines.join(' ')}>
+  {lines.map(line=><span class="reveal-line" aria-hidden="true"><span class="reveal-line-inner">{line}</span></span>)}
+</Tag>

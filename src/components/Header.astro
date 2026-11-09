@@ -1,29 +1,124 @@
 ---
 import Arrow from './Arrow.astro';
+import ServiceIcon from './ServiceIcon.astro';
+import ButtonGlow from './ButtonGlow.astro';
+import { serviceMenuGroups } from '../data/services';
+const path=Astro.url.pathname;
 ---
 <header class="site-header" data-header>
-  <a class="brand" href="/" aria-label="ANZ Landscaping home"><img src="/images/logo-mark.webp" width="92" height="45" alt="ANZ" fetchpriority="high" /><span>Landscaping</span></a>
-  <nav class="desktop-nav" aria-label="Main navigation"><a href="/#services">What we do</a><a href="/#projects">Our work</a><a href="/#about">About ANZ</a><a href="/#process">Our approach</a></nav>
-  <a class="nav-cta" href="/#enquire">Let’s talk <Arrow /></a>
-  <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-navigation"><span></span><span></span></button>
-  <nav id="mobile-navigation" class="mobile-nav" aria-label="Mobile navigation" hidden><a href="/#services">What we do <span>01</span></a><a href="/#projects">Our work <span>02</span></a><a href="/#about">About ANZ <span>03</span></a><a href="/#process">Our approach <span>04</span></a><a href="/#enquire">Start a conversation <span>↗</span></a><p>Rooted in Bengaluru.<br />Made for your space.</p></nav>
+ <a class="brand" href="/" aria-label="ANZ Landscaping home"><img src="/images/logo-mark.webp" width="92" height="45" alt="ANZ" fetchpriority="high" /><span>Landscaping</span></a>
+ <span class="nav-hover-surface" data-nav-hover aria-hidden="true"></span>
+ <nav class="desktop-nav" aria-label="Main navigation">
+  <div class="nav-services" data-desktop-service-area>
+   <button class="services-toggle" data-services-toggle aria-expanded="false" aria-controls="desktop-services-menu"><ServiceIcon name="leaf" size={17}/>Services<ServiceIcon name="chevron" size={14} class="nav-chevron"/></button>
+   <div id="desktop-services-menu" class="mega-menu" hidden inert>
+    <div class="mega-feature"><img src="/images/menu-garden.webp" width="280" height="380" alt="ANZ terrace garden" loading="lazy"/><div><span class="eyebrow">ANZ services</span><p>Gardens for homes<br/>and businesses.</p><a href="/services/">Explore all services <Arrow/></a></div></div>
+    <div class="mega-groups">{serviceMenuGroups.map(group=><div class="mega-group"><span class="mega-group-title">{group.title}</span>{group.services.map(service=><a href={`/services/${service.slug}/`} class="mega-link" aria-current={path===`/services/${service.slug}/`?'page':undefined}><span class="nav-icon"><ServiceIcon name={service.icon}/></span><span>{service.title}</span><span class="menu-link-arrow" aria-hidden="true">↗</span></a>)}</div>)}<div class="mega-bottom"><span>Design, installation and maintenance.</span><a href="/services/">View every service <Arrow/></a></div></div>
+   </div>
+  </div>
+  <a href="/#projects"><ServiceIcon name="projects" size={17}/>Our work</a>
+  <a href="/#about"><ServiceIcon name="about" size={17}/>About ANZ</a>
+  <a href="/#process"><ServiceIcon name="approach" size={17}/>Our approach</a>
+ </nav>
+ <a class="nav-cta" href="/#enquire"><span class="button-text">Let’s talk</span><Arrow/><ButtonGlow/></a>
+ <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-navigation"><span></span><span></span></button>
+ <nav id="mobile-navigation" class="mobile-nav" data-lenis-prevent aria-label="Mobile navigation" hidden inert>
+  <button class="mobile-services-toggle" aria-expanded="false" aria-controls="mobile-services"><span><ServiceIcon name="leaf" size={21}/>Our services</span><ServiceIcon name="chevron" size={18} class="nav-chevron"/></button>
+  <div id="mobile-services" class="mobile-services" hidden inert>{serviceMenuGroups.map(group=><div><span class="mobile-group-title">{group.title}</span>{group.services.map(service=><a href={`/services/${service.slug}/`}><ServiceIcon name={service.icon} size={20}/><span>{service.title}</span><span aria-hidden="true">↗</span></a>)}</div>)}<a class="mobile-all-services" href="/services/">View every service <Arrow/></a></div>
+  <a href="/#projects"><span><ServiceIcon name="projects" size={21}/>Our work</span><span>02</span></a>
+  <a href="/#about"><span><ServiceIcon name="about" size={21}/>About ANZ</span><span>03</span></a>
+  <a href="/#process"><span><ServiceIcon name="approach" size={21}/>Our approach</span><span>04</span></a>
+  <a href="/#enquire"><span><ServiceIcon name="arrow" size={21}/>Start a conversation</span><span>↗</span></a>
+  <p>ANZ Landscaping<br/>Bengaluru</p>
+ </nav>
 </header>
 <script>
-  function setupHeader() {
-    const header = document.querySelector<HTMLElement>('[data-header]');
-    const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
-    const menu = document.querySelector<HTMLElement>('#mobile-navigation');
-    if (!header || !toggle || !menu) return;
-    const controller = new AbortController();
-    const close = () => { toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Open navigation'); menu.hidden = true; header.classList.remove('menu-open'); };
-    toggle.addEventListener('click', () => { const open = toggle.getAttribute('aria-expanded') !== 'true'; toggle.setAttribute('aria-expanded', String(open)); toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation'); menu.hidden = !open; header.classList.toggle('menu-open', open); }, { signal: controller.signal });
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', close, { signal: controller.signal }));
-    document.addEventListener('keydown', e => { if(e.key === 'Escape') { close(); toggle.focus(); } }, { signal: controller.signal });
-    const media = matchMedia('(min-width: 901px)'); media.addEventListener('change', close, { signal: controller.signal });
-    const observe = () => header.classList.toggle('is-scrolled', window.scrollY > 40);
-    window.addEventListener('scroll', observe, { passive: true, signal: controller.signal }); observe();
-    document.addEventListener('astro:before-swap', () => controller.abort(), { once: true });
+ import gsap from 'gsap';
+ let dispose: (()=>void)|undefined;
+ function setupHeader() {
+  dispose?.();
+  const header=document.querySelector<HTMLElement>('[data-header]');
+  const desktopToggle=document.querySelector<HTMLButtonElement>('[data-services-toggle]');
+  const desktopArea=document.querySelector<HTMLElement>('[data-desktop-service-area]');
+  const mega=document.querySelector<HTMLElement>('#desktop-services-menu');
+  const toggle=document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const menu=document.querySelector<HTMLElement>('#mobile-navigation');
+  const subToggle=document.querySelector<HTMLButtonElement>('.mobile-services-toggle');
+  const subMenu=document.querySelector<HTMLElement>('#mobile-services');
+  const nav=header?.querySelector<HTMLElement>('.desktop-nav');
+  const highlight=header?.querySelector<HTMLElement>('[data-nav-hover]');
+  if(!header||!desktopToggle||!desktopArea||!mega||!toggle||!menu||!subToggle||!subMenu||!nav||!highlight)return;
+  const hoverSurface=highlight;
+  const controller=new AbortController(),signal=controller.signal;
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+  const desktop=matchMedia('(min-width:901px)');
+  const navTargets=[desktopToggle,...nav.querySelectorAll<HTMLAnchorElement>(':scope > a')];
+  let hoveredTarget:HTMLElement|null=null;
+  let highlightVisible=false;
+  function moveHighlight(target:HTMLElement|null){
+   if(!target||!desktop.matches){highlightVisible=false;gsap.to(hoverSurface,{opacity:0,duration:reduced.matches?0:.2,overwrite:true});return;}
+   const base=header!.getBoundingClientRect(),box=target.getBoundingClientRect();
+   const sx=header!.offsetWidth/base.width,sy=header!.offsetHeight/base.height;
+   const geometry={x:(box.left-base.left)*sx-9,y:(box.top-base.top)*sy-2,width:box.width*sx+18,height:box.height*sy+4};
+   if(!highlightVisible||reduced.matches)gsap.set(hoverSurface,geometry);
+   gsap.to(hoverSurface,{...geometry,opacity:1,duration:reduced.matches?0:.42,ease:'power3.out',overwrite:'auto'});
+   highlightVisible=true;
   }
-  setupHeader();
-  document.addEventListener('astro:page-load', setupHeader);
+  function syncHighlight(focus:Element|null=document.activeElement){
+   const focused=navTargets.find(target=>target===focus)||null;
+   moveHighlight(hoveredTarget||focused||(desktopToggle!.getAttribute('aria-expanded')==='true'?desktopToggle:null));
+  }
+  let hoverTimer:ReturnType<typeof setTimeout>;
+  const menuItems=(element:HTMLElement)=>Array.from(element.querySelectorAll<HTMLElement>('.mega-group-title,.mega-link,.mobile-group-title,.mobile-services>div>a'));
+  function panel(button:HTMLButtonElement,element:HTMLElement,open:boolean,accordion=false) {
+   if(button.getAttribute('aria-expanded')===String(open))return;
+   button.setAttribute('aria-expanded',String(open));element.inert=!open;
+   const items=menuItems(element);
+   gsap.killTweensOf([element,...items]);
+   if(open) {
+    const wasHidden=element.hidden;element.hidden=false;
+    if(wasHidden&&!reduced.matches&&items.length)gsap.fromTo(items,{y:5},{y:0,duration:.42,stagger:{each:.014,from:'start'},ease:'power3.out',clearProps:'transform'});
+    else gsap.to(items,{y:0,duration:reduced.matches?0:.28,ease:'power3.out',clearProps:'transform'});
+    if(accordion)gsap.fromTo(element,{height:wasHidden?0:element.offsetHeight},{height:'auto',duration:reduced.matches?0:.48,ease:'power3.out',clearProps:'height'});
+    else {
+     if(wasHidden)gsap.set(element,{y:-9,opacity:0});
+     gsap.to(element,{y:0,opacity:1,duration:reduced.matches?0:.38,ease:'power3.out',clearProps:'transform,opacity'});
+    }
+   } else {
+    gsap.to(element,accordion?{height:0,duration:reduced.matches?0:.32,ease:'power2.inOut',onComplete:()=>{element.hidden=true;gsap.set(element,{clearProps:'height'});}}:{y:-5,opacity:0,duration:reduced.matches?0:.22,ease:'power2.inOut',onComplete:()=>{element.hidden=true;gsap.set(element,{clearProps:'transform,opacity'});}});
+   }
+   if(button===desktopToggle)syncHighlight();
+  }
+  navTargets.forEach(target=>{
+   target.addEventListener('pointerenter',()=>{if(matchMedia('(hover:hover) and (pointer:fine)').matches){hoveredTarget=target;moveHighlight(target);}},{signal});
+   target.addEventListener('focus',()=>{hoveredTarget=null;moveHighlight(target);},{signal});
+  });
+  nav.addEventListener('pointerleave',()=>{hoveredTarget=null;syncHighlight();},{signal});
+  nav.addEventListener('focusout',event=>{if(!nav.contains(event.relatedTarget as Node))syncHighlight(event.relatedTarget as Element|null);},{signal});
+  const resize=new ResizeObserver(()=>syncHighlight());resize.observe(header);
+  const closeDesktop=()=>{clearTimeout(hoverTimer);panel(desktopToggle,mega,false);};
+  const closeMobile=()=>{panel(toggle,menu,false);toggle.setAttribute('aria-label','Open navigation');header.classList.remove('menu-open');panel(subToggle,subMenu,false,true);};
+  desktopToggle.addEventListener('click',()=>{clearTimeout(hoverTimer);panel(desktopToggle,mega,desktopToggle.getAttribute('aria-expanded')!=='true');},{signal});
+  desktopArea.addEventListener('pointerenter',()=>{if(desktop.matches&&matchMedia('(hover:hover)').matches){clearTimeout(hoverTimer);hoverTimer=setTimeout(()=>panel(desktopToggle,mega,true),85);}},{signal});
+  desktopArea.addEventListener('pointerleave',()=>{clearTimeout(hoverTimer);if(desktopArea.contains(document.activeElement))return;hoverTimer=setTimeout(closeDesktop,180);},{signal});
+  desktopToggle.addEventListener('keydown',event=>{if(event.key==='ArrowDown'){event.preventDefault();panel(desktopToggle,mega,true);mega.querySelector<HTMLAnchorElement>('.mega-link')?.focus();}},{signal});
+  desktopArea.addEventListener('focusout',event=>{if(!desktopArea.contains(event.relatedTarget as Node))closeDesktop();},{signal});
+  toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';panel(toggle,menu,open);toggle.setAttribute('aria-label',open?'Close navigation':'Open navigation');header.classList.toggle('menu-open',open);if(!open)panel(subToggle,subMenu,false,true);},{signal});
+  subToggle.addEventListener('click',()=>panel(subToggle,subMenu,subToggle.getAttribute('aria-expanded')!=='true',true),{signal});
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMobile,{signal}));
+  mega.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeDesktop,{signal}));
+  document.addEventListener('pointerdown',event=>{if(!header.contains(event.target as Node)){closeDesktop();closeMobile();}},{signal});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'){if(desktopToggle.getAttribute('aria-expanded')==='true'){closeDesktop();desktopToggle.focus();}if(toggle.getAttribute('aria-expanded')==='true'){closeMobile();toggle.focus();}}},{signal});
+  desktop.addEventListener('change',()=>{hoveredTarget=null;closeDesktop();closeMobile();syncHighlight();},{signal});
+  const panels=[[desktopToggle,mega],[toggle,menu],[subToggle,subMenu]] as const;
+  reduced.addEventListener('change',()=>{panels.forEach(([button,element])=>{gsap.killTweensOf([element,...menuItems(element)]);element.hidden=button.getAttribute('aria-expanded')!=='true';element.inert=element.hidden;gsap.set([element,...menuItems(element)],{clearProps:'height,transform,opacity'});});syncHighlight();},{signal});
+  const observe=()=>header.classList.toggle('is-scrolled',window.scrollY>40);
+  window.addEventListener('scroll',observe,{passive:true,signal});observe();
+  dispose=()=>{controller.abort();resize.disconnect();clearTimeout(hoverTimer);gsap.killTweensOf([highlight,mega,menu,subMenu,...menuItems(mega),...menuItems(subMenu)]);gsap.set(highlight,{clearProps:'all'});panels.forEach(([button,element])=>{button.setAttribute('aria-expanded','false');element.hidden=true;element.inert=true;gsap.set([element,...menuItems(element)],{clearProps:'height,transform,opacity'});});header.classList.remove('menu-open');toggle.setAttribute('aria-label','Open navigation');};
+ }
+ setupHeader();
+ document.addEventListener('astro:page-load',setupHeader);
+ document.addEventListener('astro:before-swap',()=>dispose?.());
+ window.addEventListener('pagehide',()=>dispose?.());
+ window.addEventListener('pageshow',event=>{if(event.persisted)setupHeader();});
 </script>

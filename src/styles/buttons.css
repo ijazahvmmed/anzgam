@@ -1,0 +1,83 @@
+/* The face stays opaque and readable; light gathers on the rim and outside it. */
+.button,.nav-cta{--cta-face:#28543c;--cta-foot:#102e21;--cta-aura:#a9d580;--cta-edge:#e5f7ca;--cta-ink:var(--paper);--cta-radius:12px}
+.nav-cta{--cta-face:#d8edb1;--cta-foot:#a4bd7f;--cta-aura:#bddf89;--cta-edge:#f7ffdd;--cta-ink:#173e2e}
+.button--light,.button--outline{--cta-face:#f4f6eb;--cta-foot:#c4d0b5;--cta-aura:#c3e393;--cta-edge:#ffffff;--cta-ink:#173e2e}
+.button .button-label,.button .button-icon,.nav-cta{
+ --cta-surface:radial-gradient(ellipse at 20% 0,#ffffff23,transparent 65%),linear-gradient(180deg,#ffffff13,transparent 40%,#0b23100b 85%),var(--cta-face);
+ position:relative;isolation:isolate;overflow:visible;border:0;color:var(--cta-ink);border-radius:var(--cta-radius);background:var(--cta-surface);
+ box-shadow:inset 0 1px 0 #ffffff8c,inset 1px 0 0 #ffffff28,inset -1px 0 0 #ffffff28,inset 0 -3px 1px var(--cta-foot),0 2px 3px #132b1a17;
+ transition:transform .35s var(--ease),box-shadow .35s,background .35s;
+}
+.button .button-icon{--cta-radius:50%;flex-shrink:0}
+.button-text,.button-icon>svg:not(.cta-glow),.nav-cta>svg:not(.cta-glow){position:relative;z-index:4}
+.button-label>.button-text{display:inline-block}
+.button .button-label:before,.button .button-icon:before,.nav-cta:before{
+ content:'';position:absolute;inset:-5px;border-radius:inherit;pointer-events:none;z-index:-1;
+ background:var(--cta-aura);filter:blur(8px);opacity:.16;
+ animation:cta-breathe 3.6s ease-in-out infinite alternate;animation-play-state:paused;
+}
+.button-label:has(>.cta-glow[data-running=true]):before,.button-icon:has(>.cta-glow[data-running=true]):before,.nav-cta:has(>.cta-glow[data-running=true]):before{animation-play-state:running}
+.cta-optics{position:absolute;inset:1px;border-radius:inherit;overflow:hidden;pointer-events:none;z-index:1;box-shadow:inset 0 1px 2px #ffffff2e,inset 0 -1px 1px #102e2126}
+.cta-optics:before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(145deg,#ffffff35,transparent 30%,transparent 68%,#ffffff18);box-shadow:inset 0 1px 0 #ffffff30}
+.cta-optics:after{
+ content:'';position:absolute;left:-120%;top:-60%;height:220%;width:42%;pointer-events:none;
+ background:linear-gradient(100deg,transparent,#ffffff70 45%,#ffffff16 55%,transparent);opacity:0;transform:translateX(0) skewX(-18deg);
+ animation:cta-reflection 7.5s var(--ease) infinite;animation-play-state:paused;
+}
+:is(.button-label,.button-icon,.nav-cta):has(>.cta-glow[data-running=true])>.cta-optics:after{animation-play-state:running}
+.cta-glow,.nav-cta>.cta-glow{position:absolute;inset:0;width:100%;height:100%;fill:none;color:var(--cta-edge);overflow:visible;pointer-events:none;z-index:3}
+.cta-glow rect{width:calc(100% - 2px);height:calc(100% - 2px);rx:var(--cta-radius);stroke:currentColor;stroke-dasharray:20 80;stroke-dashoffset:0;animation:cta-rim-travel 7.5s linear infinite;animation-play-state:paused}
+.cta-glow .cta-rim{stroke-width:1;opacity:.88;filter:none}
+.cta-glow .cta-halo{stroke-width:3;opacity:.65;filter:blur(2.5px)}
+.cta-glow[data-running=true] rect{animation-play-state:running}
+.button:is(:hover,:focus-visible) .button-label,.nav-cta:is(:hover,:focus-visible){background:var(--cta-surface);transform:translateY(-1px);box-shadow:inset 0 1px 0 #ffffffa6,inset 1px 0 0 #ffffff40,inset -1px 0 0 #ffffff40,inset 0 -3px 1px var(--cta-foot),0 4px 9px #132b1a1a}
+.button:is(:hover,:focus-visible) .button-icon{background:var(--cta-surface);transform:translateY(-1px) rotate(-25deg)}
+.button:is(:hover,:focus-visible) :is(.button-label,.button-icon):before,.nav-cta:is(:hover,:focus-visible):before{opacity:.42;animation:none}
+.button:is(:hover,:focus-visible) .cta-optics:after,.nav-cta:is(:hover,:focus-visible)>.cta-optics:after{animation:cta-reflection-hover .9s var(--ease) both}
+.button:active .button-label,.button:active .button-icon,.nav-cta:active{transform:translateY(1px);box-shadow:inset 0 1px 2px #102e2126,inset 0 -1px 0 var(--cta-foot),0 1px 2px #132b1a12}
+.button:disabled :is(.button-label,.button-icon):before{opacity:0;animation:none}
+.button:disabled .cta-optics:after{display:none}
+.button:disabled .cta-glow rect{animation-play-state:paused;opacity:.2}
+@keyframes cta-breathe{from{opacity:.13;transform:scale(.98)}to{opacity:.28;transform:scale(1.025)}}
+@keyframes cta-rim-travel{to{stroke-dashoffset:-100}}
+@keyframes cta-reflection{0%,70%{transform:translateX(0) skewX(-18deg);opacity:0}78%{opacity:.4}100%{transform:translateX(650%) skewX(-18deg);opacity:0}}
+@keyframes cta-reflection-hover{0%{transform:translateX(0) skewX(-18deg);opacity:0}25%{opacity:.65}100%{transform:translateX(650%) skewX(-18deg);opacity:0}}
+@media(prefers-reduced-motion:reduce){
+ .button .button-label,.button .button-icon,.nav-cta{transition:none}
+ .button .button-label:before,.button .button-icon:before,.nav-cta:before{animation:none;opacity:.13}
+ .cta-glow rect{animation:none;stroke-dasharray:none}.cta-glow .cta-rim{opacity:.25}.cta-glow .cta-halo{display:none}
+ .cta-optics:after{display:none}
+ .button:is(:hover,:focus-visible) .button-label,.button:is(:hover,:focus-visible) .button-icon,.nav-cta:is(:hover,:focus-visible){transform:none}
+}
+
+/* Selection controls share the optical finish, with a quieter single reflection. */
+.segmented{background:linear-gradient(180deg,#f4f6ef,#e5e9df);border-color:#c8d0c1;box-shadow:inset 0 1px 0 #ffffffb3,inset 0 -1px 2px #173e2e08,0 1px 2px #173e2e06;isolation:isolate}
+.segmented .choice-surface,.directory-nav .choice-surface{
+ --choice-aura:#a9ca7b;position:relative;isolation:isolate;overflow:visible;min-height:42px;font-weight:500;
+ background:transparent;box-shadow:inset 0 1px 0 transparent,inset 0 -2px 0 transparent;
+ transition:background .3s,box-shadow .3s,color .25s,transform .25s var(--ease);
+}
+.choice-surface>.control-label,.directory-nav .choice-surface>span,.directory-nav .choice-surface>svg{position:relative;z-index:2}
+.directory-nav .choice-surface>.control-label{font-size:inherit;color:inherit}
+.choice-surface:before{content:'';position:absolute;inset:1px;border-radius:inherit;pointer-events:none;z-index:-1;box-shadow:0 0 10px 2px var(--choice-aura);opacity:0;transition:opacity .35s}
+.choice-surface:after{content:'';position:absolute;inset:1px;border-radius:inherit;pointer-events:none;z-index:1;background:linear-gradient(110deg,transparent 38%,#ffffff40 49%,#ffffff16 55%,transparent 66%) 150% 0/250% 100%;opacity:0}
+.segmented button[aria-pressed=true]{color:var(--paper);background:transparent;box-shadow:none}
+.segmented .choice-surface{isolation:auto}
+.selection-indicator{position:absolute;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 20% 0,#ffffff22,transparent 65%),linear-gradient(180deg,#2c583f,#214b35);box-shadow:inset 0 1px 0 #edf6d36b,inset 1px 0 0 #ffffff26,inset -1px 0 0 #ffffff1c,inset 0 -2px 1px #102f22,0 1px 3px #173e2e1a}
+.selection-indicator:before{content:'';position:absolute;inset:1px;border-radius:inherit;box-shadow:0 0 10px 2px #a9ca7b;opacity:.2}
+.selection-indicator:after{content:'';position:absolute;inset:1px;border-radius:inherit;background:linear-gradient(110deg,transparent 38%,#ffffff40 49%,#ffffff16 55%,transparent 66%) 150% 0/250% 100%;animation:choice-select .9s var(--ease) both}
+.segmented .control-label{transition:transform .4s var(--ease)}
+.segmented .choice-surface:is(:hover,:focus-visible) .control-label{transform:translateY(-1px)}
+.segmented .choice-surface:is(:hover,:focus-visible):not([aria-pressed=true]),.directory-nav .choice-surface:is(:hover,:focus-visible){background:linear-gradient(180deg,#fafbf4,#e8eedf);box-shadow:inset 0 1px 0 #ffffffdb,inset 0 -2px 1px #c9d5bb,0 1px 3px #173e2e0c}
+.segmented .choice-surface:is(:hover,:focus-visible):before,.directory-nav .choice-surface:is(:hover,:focus-visible):before{opacity:.28}
+.segmented .choice-surface:is(:hover,:focus-visible):after,.directory-nav .choice-surface:is(:hover,:focus-visible):after{opacity:1;animation:choice-hover .8s var(--ease) both}
+.segmented .choice-surface:active,.directory-nav .choice-surface:active{transform:translateY(1px)}
+.directory-nav .choice-surface{border-radius:30px;background:linear-gradient(180deg,#f3f6ec,#e9eee0);box-shadow:inset 0 1px 0 #ffffffb3,inset 0 -1px 0 #ced8c1}
+@keyframes choice-select{0%{background-position:150% 0}100%{background-position:-50% 0}}
+@keyframes choice-hover{0%{background-position:150% 0}100%{background-position:-50% 0}}
+@media(prefers-reduced-motion:reduce){
+ .segmented .choice-surface,.directory-nav .choice-surface,.choice-surface:before{transition:none}
+ .choice-surface:after,.selection-indicator:after{display:none}
+ .segmented .control-label{transition:none;transform:none!important}
+ .segmented .choice-surface:active,.directory-nav .choice-surface:active{transform:none}
+}

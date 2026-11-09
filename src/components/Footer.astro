@@ -1,8 +1,19 @@
 ---
 import Arrow from './Arrow.astro';
+import NatureMarquee from './NatureMarquee.astro';
+const home=Astro.url.pathname==='/';
 ---
-<footer class="footer">
- <div class="footer-top"><a href="/" aria-label="ANZ home"><img class="footer-logo" src="/images/logo-white.webp" alt="ANZ — Plant care, plantscaping, plant rentals" width="260" height="145" loading="lazy" /></a><p>Bringing spaces to life.<br />And life to your spaces.</p><a class="back-top" href="#top" aria-label="Back to top"><Arrow /></a></div>
- <div class="footer-grid"><div><span class="footer-label">Let’s make something grow.</span><a class="footer-email" href="mailto:contact@anzlandscaping.in">contact@anzlandscaping.in <span>↗</span></a><a href="tel:+919845292729">+91 98452 92729</a><a href="tel:+919686111739">+91 96861 11739</a></div><div><span class="footer-label">Explore</span><a href="/#projects">Our work</a><a href="/#services">What we do</a><a href="/#about">About ANZ</a><a href="/#enquire">Get in touch</a></div><div><span class="footer-label">Find us</span><address>2948, 6th Cross Road,<br />HAL 2nd Stage, Doopanahalli,<br />Indiranagar, Bengaluru 560008.</address><a href="https://www.google.com/maps/search/?api=1&query=ANZ+Landscaping+Indiranagar+Bengaluru" target="_blank" rel="noopener noreferrer">Get directions ↗</a></div></div>
- <div class="footer-bottom"><span>© {new Date().getFullYear()} ANZ Landscaping</span><span>Thoughtfully designed. Naturally ANZ.</span><a href="https://anzlandscaping.in/privacy-policy/">Privacy policy ↗</a></div>
+<footer class="footer footer-reframed" style={'--footer-join:'+(home?'var(--pollen)':'var(--paper)')}>
+ <div class="footer-ribbon"><NatureMarquee variant="brand"/></div>
+ <div class="footer-frame">
+  <div class="footer-topline"><span class="eyebrow">Landscaping in Bengaluru</span><a class="footer-back" href="#top">Back to top <span><Arrow/></span></a></div>
+  <div class="footer-navigation">
+   <div class="footer-contact"><span class="footer-label">Start a conversation</span><a class="footer-contact-title" href="mailto:contact@anzlandscaping.in">Let’s talk <Arrow/></a><a class="footer-contact-email" href="mailto:contact@anzlandscaping.in">contact@anzlandscaping.in</a><a class="footer-phone" href="tel:+919845292729">+91 98452 92729</a><a class="footer-secondary-phone" href="tel:+919686111739">+91 96861 11739</a></div>
+   <nav aria-label="Footer navigation"><span class="footer-label">Explore</span><a href="/#projects">Our work</a><a href="/#about">About ANZ</a><a href="/#process">Our approach</a><a href="/services/">All services</a></nav>
+   <nav aria-label="Footer services"><span class="footer-label">What we do</span><a href="/services/commercial-landscaping/">Commercial landscapes</a><a href="/services/villa-landscaping/">Residential gardens</a><a href="/services/vertical-garden/">Plantscaping</a><a href="/services/garden-maintenance/">Garden care</a></nav>
+   <div class="footer-visit"><span class="footer-label">Visit ANZ</span><address>2948, 6th Cross Road,<br/>HAL 2nd Stage, Doopanahalli,<br/>Indiranagar, Bengaluru 560008.</address><a href="https://www.google.com/maps/search/?api=1&query=ANZ+Landscaping+Indiranagar+Bengaluru" target="_blank" rel="noopener noreferrer">Get directions <span aria-hidden="true">↗</span></a></div>
+  </div>
+  <div class="footer-brandrow"><a href="/" aria-label="ANZ Landscaping home"><img class="footer-brandmark" src="/images/logo-white.webp" alt="ANZ" width="900" height="497" loading="lazy"/></a><p>Design.<br/>Build.<br/>Care.</p></div>
+  <div class="footer-legal"><span>© {new Date().getFullYear()} ANZ Landscaping</span><span>Bengaluru, India</span><a href="https://anzlandscaping.in/privacy-policy/">Privacy policy <span aria-hidden="true">↗</span></a></div>
+ </div>
 </footer>

@@ -12,13 +12,18 @@ import villa from '../assets/Villa-landscaping.webp';
 import vertical from '../assets/anz-service-fimg8.webp';
 import rental from '../assets/office-plant-rental-banner.webp';
 import pergola from '../assets/PERGOLA-BANNER-SERVIE-BANNER-anz.webp';
+import projectMalhar from '../assets/retouched/goodearth-malhar.webp';
+import projectBhive from '../assets/retouched/bhive-premium.webp';
+import projectSkylark from '../assets/retouched/skylark-mansions.webp';
+import projectIampl from '../assets/retouched/iampl.webp';
+import hero from '../assets/retouched/terrace-hero.webp';
 
-export const imagery = { terrace, malhar, malharDetail, bhive, bhiveWall, skylark, skylarkDetail, iampl, care, softscape, villa, vertical, rental, pergola };
+export const imagery = { hero, terrace, malhar, malharDetail, bhive, bhiveWall, skylark, skylarkDetail, iampl, care, softscape, villa, vertical, rental, pergola };
 export const projects = [
-  { slug: 'goodearth-malhar', name: 'GoodEarth Malhar', category: 'Residential', location: 'Medley, Bengaluru', image: malhar, gallery: [malhar, malharDetail], description: 'A planted outdoor retreat at GoodEarth Malhar. Greenery, timber and sheltered seating bring nature into everyday living.' },
-  { slug: 'bhive-premium', name: 'BHIVE Premium', category: 'Commercial', location: 'HSR Campus, Bengaluru', image: bhive, gallery: [bhive, bhiveWall], description: 'Planting for a working environment at BHIVE Premium’s HSR Campus. Interior planters and vertical greenery create a softer setting for the workday.' },
-  { slug: 'skylark-mansions', name: 'Skylark Mansions', category: 'Residential', location: 'Bengaluru', image: skylark, gallery: [skylark, skylarkDetail], description: 'Vertical planting and garden spaces at Skylark Mansions. A close look at ANZ’s planting and on-site execution.' },
-  { slug: 'iampl', name: 'IAMPL', category: 'Commercial', location: 'SEZ Tech Park, Bengaluru', image: iampl, gallery: [iampl], description: 'Landscape execution for IAMPL. Planting along the building edge brings a green layer to this commercial setting.' },
+  { slug: 'goodearth-malhar', name: 'GoodEarth Malhar', category: 'Residential', location: 'Medley, Bengaluru', image: projectMalhar, gallery: [projectMalhar, malhar, malharDetail], description: 'A planted outdoor retreat at GoodEarth Malhar. Greenery, timber and sheltered seating bring nature into everyday living.' },
+  { slug: 'bhive-premium', name: 'BHIVE Premium', category: 'Commercial', location: 'HSR Campus, Bengaluru', image: projectBhive, gallery: [projectBhive, bhive, bhiveWall], description: 'Planting for a working environment at BHIVE Premium’s HSR Campus. Interior planters and vertical greenery create a softer setting for the workday.' },
+  { slug: 'skylark-mansions', name: 'Skylark Mansions', category: 'Residential', location: 'Bengaluru', image: projectSkylark, gallery: [projectSkylark, skylark, skylarkDetail], description: 'Vertical planting and garden spaces at Skylark Mansions. A close look at ANZ’s planting and on site execution.' },
+  { slug: 'iampl', name: 'IAMPL', category: 'Commercial', location: 'SEZ Tech Park, Bengaluru', image: projectIampl, gallery: [projectIampl, iampl], description: 'Landscape execution for IAMPL. Planting along the building edge brings a green layer to this commercial setting.' },
 ];
 export const services = [
   { slug: 'commercial-landscaping', title: 'Commercial landscapes', label: '01', image: bhive, short: 'Greener places to work, welcome and connect.', description: 'Landscape design and execution for offices, corporate campuses, hospitality spaces and developments. Planting, circulation and outdoor areas considered together.', items: ['Corporate & office landscapes', 'Hospitality & developments', 'Softscape & hardscape', 'Landscape irrigation'] },
@@ -29,11 +34,11 @@ export const services = [
 export const processSteps = [
   { title: 'Start with your space.', body: 'Tell us what you have in mind. We discuss your site, how it will be used, and the requirements and budget that will guide the landscape.', image: malhar },
   { title: 'Bring the details together.', body: 'Explore the planting, materials and landscape elements that suit your space. We work through the scope with you before moving into execution.', image: softscape },
-  { title: 'Build it. Then help it grow.', body: 'Our on-site teams bring the landscape to life. For ongoing support, talk to us about garden maintenance and plant care.', image: care },
+  { title: 'Build it. Then help it grow.', body: 'Our on site teams bring the landscape to life. For ongoing support, talk to us about garden maintenance and plant care.', image: care },
 ];
 export const faqs = [
-  { question: 'Do you work on both homes and commercial spaces?', answer: 'Yes. ANZ works on residential gardens, villas, terraces, offices, corporate campuses, hotels and developments. Share your location and requirements so we can discuss the right scope.' },
-  { question: 'Can you handle design and execution?', answer: 'ANZ provides landscape design and execution, including planting, hardscape, pergolas, irrigation and water features. The services included will depend on your project.' },
-  { question: 'Can you help maintain an existing garden?', answer: 'Yes. Garden maintenance and plant care are part of our services. Get in touch with details of your existing landscape and the support you need.' },
-  { question: 'How do I start a project with ANZ?', answer: 'Use the enquiry form below, email contact@anzlandscaping.in or call +91 98452 92729. Tell us about your space, location and requirements.' },
+  { question: 'Do you work on both homes and commercial spaces?', answer: 'Yes. We work on gardens, villas, offices, campuses, hotels and developments.' },
+  { question: 'Can you handle design and execution?', answer: 'Yes. We handle design, planting, hardscape, pergolas, irrigation and water features.' },
+  { question: 'Can you help maintain an existing garden?', answer: 'Yes. We provide regular maintenance and plant care for existing gardens.' },
+  { question: 'How do I start a project with ANZ?', answer: 'Send an enquiry with your location and requirements. Our team will get in touch.' },
 ];

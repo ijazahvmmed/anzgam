@@ -1,0 +1,7 @@
+---
+interface Props { variant?: 'seed' | 'leaf' | 'sprout'; }
+const { variant='leaf' }=Astro.props;
+---
+<svg viewBox="0 0 120 120" fill="currentColor" aria-hidden="true">
+ {variant==='seed' ? <ellipse cx="60" cy="60" rx="34" ry="44" transform="rotate(-28 60 60)"/> : variant==='sprout' ? <><path d="M58 110V62h4v48zM60 72C25 74 9 53 12 28c30-2 50 14 48 44ZM61 55C60 24 82 9 108 12c1 29-16 47-47 43Z"/></> : <path d="M8 10C33 25 66 18 92 41C109 56 114 81 110 104C95 70 66 48 37 42C64 55 82 72 88 89C45 102 17 75 8 10Z"/>}
+</svg>
